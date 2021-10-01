@@ -14,17 +14,6 @@ const groups = (state = {}, action) => {
                 }
 
             }
-            // return {
-            //     ...state,
-            //     ...action.payload,
-            //     data: {
-            //         ...state.groups,
-            //         [action.payload.page]: action.payload.groups.data.reduce((prev, cur) => {
-            //             prev[cur.id] = cur
-            //             return prev 
-            //     }, {})
-            //     }
-            // }
         default:
             return state;
     }

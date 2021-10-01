@@ -6,16 +6,15 @@ import FirstTask from './components/FirstTask';
 import { store } from './store';
 
 function App() {
-
   return (
-      <Provider store={store}>
-        <Box mt={10}>
-         <Container >
-           <CssBaseline />
-           <FirstTask></FirstTask>
-         </Container>
-        </Box>
-      </Provider>
+    <Provider store={store}>
+      <Box mt={10}>
+        <Container>
+          <CssBaseline />
+          <FirstTask></FirstTask>
+        </Container>
+      </Box>
+    </Provider>
   );
 }
 

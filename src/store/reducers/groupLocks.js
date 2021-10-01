@@ -5,6 +5,11 @@ const groupLocks = (state = {}, action) => {
                 ...state,
                 ...action.payload
             }
+        case 'ASSIGN_LOCK_GROUP':
+            return {
+                ...state,
+                ...action.payload
+            }
         default:
             return state;
     }
