@@ -1,9 +1,9 @@
 import { kisiClient } from '../../kisi';
-import { email, password } from '../../constants';
+import { EMAIL, PASSWORD } from '../../constants';
 
 const getLocks = (id) => {
   return (dispatch) => {
-    kisiClient.signIn(email, password).then(() => {
+    kisiClient.signIn(EMAIL, PASSWORD).then(() => {
       kisiClient.get('locks', { place_id: id }).then((locks) => {
         dispatch({ type: 'ADD_LOCKS', payload: locks });
       });

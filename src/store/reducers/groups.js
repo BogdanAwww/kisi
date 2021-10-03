@@ -1,21 +1,21 @@
-const groups = (state = {}, action) => {
-    switch(action.type) {
-        case 'ADD_GROUPS':
-            return {
-                ...state,
-                ...action.payload.groups,
-                currentPage: action.payload.page,
-                data: {
-                    ...state.data,
-                    [action.payload.page]:  action.payload.groups.data.reduce((prev, cur) => {
-                            prev[cur.id] = cur
-                            return prev 
-                     }, {})
-                }
+const initialState = {
+  loading: true,
+};
 
-            }
-        default:
-            return state;
-    }
-}
-export default groups
+const groups = (state = initialState, action) => {
+  switch (action.type) {
+    case 'FETCH_GROUPS':
+      return {
+        ...state,
+        ...action.payload,
+        loading: false,
+      };
+    case 'FETCH_GROUPS_LOADING':
+      return {
+        loading: true,
+      };
+    default:
+      return state;
+  }
+};
+export default groups;
