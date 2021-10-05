@@ -1,10 +1,5 @@
-export const password = ''
+export const PASSWORD = '';
 
-export const email = ''
+export const EMAIL = '';
 
-export const limit = 10
-
-export const auth = {
-    email,
-    password
-}
+export const LIMIT = 10;

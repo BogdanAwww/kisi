@@ -23,28 +23,42 @@ const HistogramPage = () => {
         .append('svg')
         .attr('width', width + margin.left + margin.right)
         .attr('height', height + margin.top + margin.bottom);
-      let scale = d3
+      let x = d3
         .scaleTime()
-        .domain(d3.extent(failEvents, d => new Date(d.createdAt)))
-        .range([0, width])
+        .domain([new Date(failEvents[failEvents.length - 1].createdAt), Date.now()])
+        .range([0, width]);
 
-      let ticks = scale.ticks();
-      let data = ticks.reduce((prev, cur) => {
-        let value = 0;
-        
-      }, [])
-      failEvents.forEach((el) => {
-        
-        console.log(`${new Date(el.createdAt)} <= ${ticks[7]} = ${new Date(el.createdAt) <= ticks[7]}`)
-      })
-      let xAxis = d3.axisBottom().scale(scale);
+      let ticks = x.ticks();
+
+      const data = ticks.reduce((prev, cur, i) => {
+        let count = 0;
+        failEvents.forEach((e) => {
+          if (new Date(e.createdAt) <= cur && new Date(e.createdAt) > prev[i - 1]?.date) {
+            count++;
+          }
+        });
+        return [
+          ...prev,
+          {
+            date: cur,
+            value: count,
+          },
+        ];
+      }, []);
+
+      let xAxis = d3.axisBottom().scale(x);
       svg.append('g').call(xAxis);
-      svg.selectAll('bars')
-      .data(failEvents)
-      .enter()
-      .append('rect')
-      .attr('x', (d) => {})
-      
+      svg
+        .append('g')
+        .selectAll('bar')
+        .data(data)
+        .enter()
+        .append('rect')
+        .attr('fill', 'steelblue')
+        .attr('x', (d) => x(d.date))
+        .attr('width', () => 100)
+        .attr('y', (d) => 20)
+        .attr('height', (d) => d.value * 100);
     }
   });
 
